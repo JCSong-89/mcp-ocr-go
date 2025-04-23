@@ -8,7 +8,7 @@ from PIL import ImageFont, Image, ImageDraw
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-trust_point = 0
+total_trust_point = 0
 get_text_count = 0
 ocr_text = []
 
@@ -84,7 +84,7 @@ def deskew_function(binary_image):
 reader = easyocr.Reader(['ko', 'en'], gpu=False)
 
 # 이미지 파일 경로
-image_path = './ocr-module/your_image2.jpg' # 실제 이미지 파일 경로로 변경하세요.
+image_path = './ocr-module/5371578.800000012_image.png' # 실제 이미지 파일 경로로 변경하세요.
 
 # OpenCV로 이미지 읽기
 image = cv2.imread(image_path)
@@ -139,7 +139,7 @@ else:
         for (bbox, text, prob) in results:
             print(f"텍스트: {text} (신뢰도: {prob:.4f})")
             ocr_text.append(text)
-            trust_point = float('f{prob:.4f}')
+            trust_point = float(f'{prob:.4f}')
             total_trust_point += trust_point
             get_text_count = get_text_count + 1 
 
