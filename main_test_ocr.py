@@ -1,5 +1,11 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+import requests
+import config.config as config
+import json
+import pandas as pd
+from io import StringIO # 문자열을 파일처럼 다루기 위해
+import re # 정규표현식 사용을 위해 import
 
 from ocr_module.ocr import image_ocr_to_text
 from pdf_to_image_parser.pdf_parser import pdf_to_images_pymupdf
@@ -14,14 +20,3 @@ for i in range(total_page_num):
 
 result = image_ocr_to_text(test_path)
 
-file_path = 'output_list.txt'
-# 파일을 쓰기 모드('w')로 열기 (인코딩 지정 권장)
-with open(file_path, 'w', encoding='utf-8') as f:
-    # 방법 1: 각 요소를 새 줄에 저장
-    for item in result:
-        f.write(str(item) + '\n') # str()로 문자열 변환 후 줄바꿈(\n) 추가
-
-    # # 방법 2: 구분자(예: 쉼표)로 연결하여 한 줄에 저장
-    # f.write(','.join(map(str, my_list))) # map()으로 모든 요소를 str 변환 후 join
-
-print(f"리스트가 '{file_path}' 파일로 저장되었습니다.")
